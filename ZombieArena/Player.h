@@ -1,96 +1,111 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
 using namespace sf;
 
-class Player {
+class Player
+{
 private:
 	const float START_SPEED = 200;
 	const float START_HEALTH = 100;
 
-	// player position
+	// Where is the player
 	Vector2f m_Position;
 
-	// sprite
+	// Of course we will need a sprite
 	Sprite m_Sprite;
 
-	// texture
+	// And a texture
+	// !!Watch this space!!
 	Texture m_Texture;
 
-	// screen resolution
+	// What is the screen resolution
 	Vector2f m_Resolution;
 
-	// size of the current arena
+	// What size is the current arena
 	IntRect m_Arena;
 
-	// tile of the arena
+	// How big is each tile of the arena
 	int m_TileSize;
 
-	// player's moving direction
+	// Which directions is the player currently moving in
 	bool m_UpPressed;
 	bool m_DownPressed;
 	bool m_LeftPressed;
 	bool m_RightPressed;
 
-	// current health
+	// How much health has the player got?
 	int m_Health;
-	// maximum health
+	// What is the maximum health the player can have
 	int m_MaxHealth;
 
-	// last time receiving hit from zombie
+	// When was the player last hit
 	Time m_LastHit;
 
-	// speed in pixel per second
+	// Speed in pixels per second
 	float m_Speed;
 
+
+	// All our public functions will come next
 public:
+
 	Player();
+
 	void spawn(IntRect arena, Vector2f resolution, int tileSize);
 
-	// reset stats (end of every game)
-	void resetPlayerStats();
-
-	// handle the player getting hit by the zombie
+	// Handle the player getting hit by a zombie
 	bool hit(Time timeHit);
 
-	// how long ago was the player last hit
+	// How long ago was the player last hit
 	Time getLastHitTime();
 
-	// player's position
+	// Where is the player
 	FloatRect getPosition();
 
-	// the center of the player
+	// Where is the center of the player
 	Vector2f getCenter();
 
-	// the angle that player is facing
+	// Which angle is the player facing
 	float getRotation();
 
-	// send a copy of the sprite to main function
+	// Send a copy of the sprite to main
 	Sprite getSprite();
 
-	// player movement
+	// How much health has the player currently got?
+	int getHealth();
+
+	// The next four functions move the player
 	void moveLeft();
+
 	void moveRight();
+
 	void moveUp();
+
 	void moveDown();
 
-	// stop the player's movement
+	// Stop the player moving in a specific direction
 	void stopLeft();
+
 	void stopRight();
+
 	void stopUp();
+
 	void stopDown();
 
-	// frame update
+	// We will call this function once every frame
 	void update(float elapsedTime, Vector2i mousePosition);
 
-	// give the player a speed boost
+	// Give player a speed boost
 	void upgradeSpeed();
 
-	// give the player some health
+	// Give the player some health
 	void upgradeHealth();
 
-	// increase the maximum amount of health
+	// Increase the maximum amount of health the player can have
 	void increaseHealthLevel(int amount);
 
-	// player's current health
-	int getHealth();
+
 };
+
+
+
