@@ -18,6 +18,9 @@
     <ClCompile Include="ZombieArena.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">

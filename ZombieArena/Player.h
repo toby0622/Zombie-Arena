@@ -34,7 +34,7 @@ private:
 	// current health
 	int m_Health;
 	// maximum health
-	int M_MaxHealth;
+	int m_MaxHealth;
 
 	// last time receiving hit from zombie
 	Time m_LastHit;
