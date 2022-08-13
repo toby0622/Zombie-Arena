@@ -201,4 +201,3 @@ void Player::increaseHealthLevel(int amount)
 		m_Health = m_MaxHealth;
 	}
 }
-
