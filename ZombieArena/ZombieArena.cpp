@@ -1,9 +1,13 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "ZombieArena.h"
 #include "Player.h"
+#include "TextureHolder.h"
 using namespace sf;
 
 int main() {
+	// instance of "TextureHolder"
+	TextureHolder holder;
+
 	// four game execution states
 	enum class State {
 		PAUSED, LEVELING_UP, GAME_OVER, PLAYING
@@ -44,8 +48,12 @@ int main() {
 	VertexArray background;
 
 	// load the texture for our background vertex array
-	Texture textureBackground;
-	textureBackground.loadFromFile("graphics/background_sheet.png");
+	Texture textureBackground = TextureHolder::GetTexture("graphics/background_sheet.png");
+
+	// prepare for a horde of zombies
+	int numZombies;
+	int numZombiesAlive;
+	Zombie* zombies = nullptr;
 
 	// main game loop
 	while (window.isOpen()) {
@@ -152,6 +160,14 @@ int main() {
 				// spawn the player in the middle of the arena
 				player.spawn(arena, resolution, tileSize);
 
+				// create a horde of zombies
+				numZombies = 10;
+
+				// delete the previously allocated memory (if any)
+				delete[] zombies;
+				zombies = createHorde(numZombies, arena);
+				numZombiesAlive = numZombies;
+
 				// reset the clock to avoid frame jump
 				clock.restart();
 			}
@@ -185,6 +201,13 @@ int main() {
 
 			// make the view centre around the player				
 			mainView.setCenter(player.getCenter());
+
+			// loop through each Zombie and update them
+			for (int i = 0; i < numZombies; i++) {
+				if (zombies[i].isAlive()) {
+					zombies[i].update(dt.asSeconds(), playerPosition);
+				}
+			}
 		} // end of updating the scene
 
 		/*
@@ -199,6 +222,11 @@ int main() {
 
 			// draw the background
 			window.draw(background, &textureBackground);
+
+			// draw the zombies
+			for (int i = 0; i < numZombies; i++) {
+				window.draw(zombies[i].getSprite());
+			}
 
 			// draw the player
 			window.draw(player.getSprite());
@@ -218,6 +246,9 @@ int main() {
 
 		window.display();
 	} // end of the game loop
+
+	// delete the previously allocated memory (if any)
+	delete[] zombies;
 
 	return 0;
 }
