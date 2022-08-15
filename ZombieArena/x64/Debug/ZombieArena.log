@@ -1,5 +1,4 @@
-﻿  Bullet.cpp
-  ZombieArena.cpp
+﻿  ZombieArena.cpp
 C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\ZombieArena.cpp(22,44): warning C4244: '=': 將 'unsigned int' 轉換為 'T'，由於類型不同，可能導致資料遺失
           with
           [
@@ -20,5 +19,4 @@ C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\ZombieArena.cpp(25,42):
           [
               T=float
           ]
-  正在產生程式碼...
   ZombieArena.vcxproj -> C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\x64\Debug\ZombieArena.exe

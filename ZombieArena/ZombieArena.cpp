@@ -147,6 +147,21 @@ int main() {
 				player.stopRight();
 			}
 
+			// fire a bullet
+			if (Mouse::isButtonPressed(sf::Mouse::Left)) {
+				if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate && bulletsInClip > 0) {
+					// pass the centre of the player and the centre of the cross-hair to the shoot function
+					bullets[currentBullet].shoot(player.getCenter().x, player.getCenter().y, mouseWorldPosition.x, mouseWorldPosition.y);
+					currentBullet++;
+
+					if (currentBullet > 99) {
+						currentBullet = 0;
+					}
+
+					lastPressed = gameTimeTotal;
+					bulletsInClip--;
+				}
+			}// end of bullet firing
 		} // end of "WASD" key commands
 
 		// handle "LEVELING_UP" state
@@ -232,6 +247,13 @@ int main() {
 					zombies[i].update(dt.asSeconds(), playerPosition);
 				}
 			}
+
+			// update any bullets that are in-flight
+			for (int i = 0; i < 100; i++) {
+				if (bullets[i].isInFlight()) {
+					bullets[i].update(dtAsSeconds);
+				}
+			}
 		} // end of updating the scene
 
 		/*
@@ -250,6 +272,12 @@ int main() {
 			// draw the zombies
 			for (int i = 0; i < numZombies; i++) {
 				window.draw(zombies[i].getSprite());
+			}
+
+			for (int i = 0; i < 100; i++) {
+				if (bullets[i].isInFlight()) {
+					window.draw(bullets[i].getShape());
+				}
 			}
 
 			// draw the player
