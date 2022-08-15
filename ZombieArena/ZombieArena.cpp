@@ -292,7 +292,7 @@ int main() {
 
 							// register the hit and see if it was a kill
 							if (zombies[j].hit()) {
-								// Not just a hit but a kill too
+								// bullet hit and zombie killed
 								score += 10;
 								
 								if (score >= hiScore) {
@@ -311,6 +311,29 @@ int main() {
 					}
 				}
 			}// end of zombie being shot
+
+			// whether zombie touches the player or not
+			for (int i = 0; i < numZombies; i++) {
+				if (player.getPosition().intersects(zombies[i].getPosition()) && zombies[i].isAlive()) {
+					if (player.hit(gameTimeTotal)) {
+						// More here later
+					}
+
+					if (player.getHealth() <= 0) {
+						state = State::GAME_OVER;
+					}
+				}
+			}// end of player being touched
+
+			// whether the player has touches health pickup
+			if (player.getPosition().intersects(healthPickup.getPosition()) && healthPickup.isSpawned()) {
+				player.increaseHealthLevel(healthPickup.gotIt());
+			}
+
+			// whether the player has touches ammo pickup
+			if (player.getPosition().intersects(ammoPickup.getPosition()) && ammoPickup.isSpawned()) {
+				bulletsSpare += ammoPickup.gotIt();
+			}
 		} // end of updating the scene
 
 		/*
