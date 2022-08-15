@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "TextureHolder.h"
 #include "Bullet.h"
+#include "Pickup.h"
 using namespace sf;
 
 int main() {
@@ -73,6 +74,10 @@ int main() {
 	Texture textureCrosshair = TextureHolder::GetTexture("graphics/crosshair.png");
 	spriteCrosshair.setTexture(textureCrosshair);
 	spriteCrosshair.setOrigin(25, 25);
+
+	// create two types of pickups
+	Pickup healthPickup(1);
+	Pickup ammoPickup(2);
 
 	// main game loop
 	while (window.isOpen()) {
@@ -206,6 +211,10 @@ int main() {
 				// spawn the player in the middle of the arena
 				player.spawn(arena, resolution, tileSize);
 
+				// configure the pickups
+				healthPickup.setArena(arena);
+				ammoPickup.setArena(arena);
+
 				// create a horde of zombies
 				numZombies = 10;
 
@@ -264,6 +273,10 @@ int main() {
 					bullets[i].update(dtAsSeconds);
 				}
 			}
+
+			// update the pickups
+			healthPickup.update(dtAsSeconds);
+			ammoPickup.update(dtAsSeconds);
 		} // end of updating the scene
 
 		/*
@@ -292,6 +305,15 @@ int main() {
 
 			// draw the player
 			window.draw(player.getSprite());
+
+			// draw the pickups if currently spawned
+			if (ammoPickup.isSpawned()) {
+				window.draw(ammoPickup.getSprite());
+			}
+
+			if (healthPickup.isSpawned()) {
+				window.draw(healthPickup.getSprite());
+			}
 
 			// draw the crosshair
 			window.draw(spriteCrosshair);
