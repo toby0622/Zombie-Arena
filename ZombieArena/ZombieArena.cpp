@@ -67,6 +67,13 @@ int main() {
 	// the time that the fire button last pressed
 	Time lastPressed;
 
+	// hide the mouse pointer and replace it with crosshair (十字準心)
+	window.setMouseCursorVisible(true);
+	Sprite spriteCrosshair;
+	Texture textureCrosshair = TextureHolder::GetTexture("graphics/crosshair.png");
+	spriteCrosshair.setTexture(textureCrosshair);
+	spriteCrosshair.setOrigin(25, 25);
+
 	// main game loop
 	while (window.isOpen()) {
 		/*
@@ -232,6 +239,9 @@ int main() {
 			// convert mouse position to world coordinates of "mainView"
 			mouseWorldPosition = window.mapPixelToCoords(Mouse::getPosition(), mainView);
 
+			// set the crosshair to the mouse location
+			spriteCrosshair.setPosition(mouseWorldPosition);
+
 			// update the player
 			player.update(dtAsSeconds, Mouse::getPosition());
 
@@ -282,6 +292,9 @@ int main() {
 
 			// draw the player
 			window.draw(player.getSprite());
+
+			// draw the crosshair
+			window.draw(spriteCrosshair);
 		}
 
 		if (state == State::LEVELING_UP)
