@@ -2,6 +2,7 @@
 #include "ZombieArena.h"
 #include "Player.h"
 #include "TextureHolder.h"
+#include "Bullet.h"
 using namespace sf;
 
 int main() {
@@ -55,6 +56,17 @@ int main() {
 	int numZombiesAlive;
 	Zombie* zombies = nullptr;
 
+	// 100 bullets should do
+	Bullet bullets[100];
+	int currentBullet = 0;
+	int bulletsSpare = 24;
+	int bulletsInClip = 6;
+	int clipSize = 6;
+	float fireRate = 1;
+
+	// the time that the fire button last pressed
+	Time lastPressed;
+
 	// main game loop
 	while (window.isOpen()) {
 		/*
@@ -84,10 +96,22 @@ int main() {
 					state = State::LEVELING_UP;
 				}
 
-				if (state == State::PLAYING)
-				{
+				if (state == State::PLAYING) {
+					// reloading
+					if (event.key.code == Keyboard::R) {
+						if (bulletsSpare >= clipSize) {
+							// plenty of bullets
+							bulletsInClip = clipSize;
+							bulletsSpare -= clipSize;
+						} else if (bulletsSpare > 0) {
+							// only few bullets left
+							bulletsInClip = bulletsSpare;
+							bulletsSpare = 0;
+						} else {
+							// More here soon?!
+						}
+					}
 				}
-
 			}
 		} // end of event polling
 
