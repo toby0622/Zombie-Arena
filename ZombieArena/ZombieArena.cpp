@@ -265,6 +265,18 @@ int main() {
 				// start a new game when "GAME_OVER" state achieved
 				else if (event.key.code == Keyboard::Return && state == State::GAME_OVER) {
 					state = State::LEVELING_UP;
+					wave = 0;
+					score = 0;
+
+					// prepare the gun and ammo for next game
+					currentBullet = 0;
+					bulletsSpare = 24;
+					bulletsInClip = 6;
+					clipSize = 6;
+					fireRate = 1;
+
+					// reset the player's stats
+					player.resetPlayerStats();
 				}
 
 				if (state == State::PLAYING) {
