@@ -357,17 +357,20 @@ int main() {
 				state = State::PLAYING;
 			}
 			if (event.key.code == Keyboard::Num4) {
-				
+				// increase speed
+				player.upgradeSpeed();
 				
 				state = State::PLAYING;
 			}
 			if (event.key.code == Keyboard::Num5) {
-				
+				// upgrade pickup
+				healthPickup.upgrade();
 				
 				state = State::PLAYING;
 			}
 			if (event.key.code == Keyboard::Num6) {
-				
+				// upgrade pickup
+				ammoPickup.upgrade();
 				
 				state = State::PLAYING;
 			}
