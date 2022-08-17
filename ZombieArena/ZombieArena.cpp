@@ -1,5 +1,7 @@
 ﻿#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <sstream>
+#include <fstream>
 #include "ZombieArena.h"
 #include "Player.h"
 #include "TextureHolder.h"
@@ -125,7 +127,9 @@ int main() {
 	levelUpText.setCharacterSize(80);
 	levelUpText.setFillColor(Color::White);
 	levelUpText.setPosition(150, 250);
+
 	std::stringstream levelUpStream;
+
 	levelUpStream << "1- Increased rate of fire" << "\n2- Increased clip size(next reload)"
 		<< "\n3- Increased max health" << "\n4- Increased run speed"
 		<< "\n5- More and better health pickups" << "\n6- More and better ammo pickups";
@@ -144,6 +148,15 @@ int main() {
 	scoreText.setCharacterSize(55);
 	scoreText.setFillColor(Color::White);
 	scoreText.setPosition(20, 0);
+
+	// load the high score from a text file
+	std::ifstream inputFile("gamedata/scores.txt");
+
+	if (inputFile.is_open()) {
+		// ">>" reads the data
+		inputFile >> hiScore;
+		inputFile.close();
+	}
 
 	// hi score
 	Text hiScoreText;
@@ -182,6 +195,48 @@ int main() {
 
 	// HUD update interval
 	int fpsMeasurementFrameInterval = 1000;
+
+	// setup the hit sound
+	SoundBuffer hitBuffer;
+	hitBuffer.loadFromFile("sound/hit.wav");
+	Sound hit;
+	hit.setBuffer(hitBuffer);
+
+	// setup the splat sound
+	SoundBuffer splatBuffer;
+	splatBuffer.loadFromFile("sound/splat.wav");
+	Sound splat;
+	splat.setBuffer(splatBuffer);
+
+	// setup the shoot sound
+	SoundBuffer shootBuffer;
+	shootBuffer.loadFromFile("sound/shoot.wav");
+	Sound shoot;
+	shoot.setBuffer(shootBuffer);
+
+	// setup the reload sound
+	SoundBuffer reloadBuffer;
+	reloadBuffer.loadFromFile("sound/reload.wav");
+	Sound reload;
+	reload.setBuffer(reloadBuffer);
+
+	// setup the failed sound
+	SoundBuffer reloadFailedBuffer;
+	reloadFailedBuffer.loadFromFile("sound/reload_failed.wav");
+	Sound reloadFailed;
+	reloadFailed.setBuffer(reloadFailedBuffer);
+
+	// setup the powerup sound
+	SoundBuffer powerupBuffer;
+	powerupBuffer.loadFromFile("sound/powerup.wav");
+	Sound powerup;
+	powerup.setBuffer(powerupBuffer);
+
+	// setup the pickup sound
+	SoundBuffer pickupBuffer;
+	pickupBuffer.loadFromFile("sound/pickup.wav");
+	Sound pickup;
+	pickup.setBuffer(pickupBuffer);
 
 	// main game loop
 	while (window.isOpen()) {
@@ -284,21 +339,36 @@ int main() {
 		if (state == State::LEVELING_UP) {
 			// handle the leveling up abilities
 			if (event.key.code == Keyboard::Num1) {
+				// increase fire rate
+				fireRate++;
+				
 				state = State::PLAYING;
 			}
 			if (event.key.code == Keyboard::Num2) {
+				// increase clip size
+				clipSize += clipSize;
+				
 				state = State::PLAYING;
 			}
 			if (event.key.code == Keyboard::Num3) {
+				// increase health
+				player.upgradeHealth();
+				
 				state = State::PLAYING;
 			}
 			if (event.key.code == Keyboard::Num4) {
+				
+				
 				state = State::PLAYING;
 			}
 			if (event.key.code == Keyboard::Num5) {
+				
+				
 				state = State::PLAYING;
 			}
 			if (event.key.code == Keyboard::Num6) {
+				
+				
 				state = State::PLAYING;
 			}
 
@@ -421,6 +491,12 @@ int main() {
 
 					if (player.getHealth() <= 0) {
 						state = State::GAME_OVER;
+
+						std::ofstream outputFile("gamedata/scores.txt");
+
+						// "<<" writes the data
+						outputFile << hiScore;
+						outputFile.close();
 					}
 				}
 			}// end of player being touched
