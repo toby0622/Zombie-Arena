@@ -286,12 +286,14 @@ int main() {
 							// plenty of bullets
 							bulletsInClip = clipSize;
 							bulletsSpare -= clipSize;
+							reload.play();
 						} else if (bulletsSpare > 0) {
 							// only few bullets left
 							bulletsInClip = bulletsSpare;
 							bulletsSpare = 0;
+							reload.play();
 						} else {
-							// More here soon?!
+							reloadFailed.play();
 						}
 					}
 				}
@@ -342,6 +344,9 @@ int main() {
 					}
 
 					lastPressed = gameTimeTotal;
+
+					shoot.play();
+
 					bulletsInClip--;
 				}
 			}// end of bullet firing
@@ -496,8 +501,9 @@ int main() {
 								if (numZombiesAlive == 0) {
 									state = State::LEVELING_UP;
 								}
-							}
 
+								splat.play();
+							}
 						}
 					}
 				}
@@ -507,7 +513,7 @@ int main() {
 			for (int i = 0; i < numZombies; i++) {
 				if (player.getPosition().intersects(zombies[i].getPosition()) && zombies[i].isAlive()) {
 					if (player.hit(gameTimeTotal)) {
-						// More here later
+						hit.play();
 					}
 
 					if (player.getHealth() <= 0) {
@@ -525,11 +531,13 @@ int main() {
 			// whether the player has touches health pickup
 			if (player.getPosition().intersects(healthPickup.getPosition()) && healthPickup.isSpawned()) {
 				player.increaseHealthLevel(healthPickup.gotIt());
+				pickup.play();
 			}
 
 			// whether the player has touches ammo pickup
 			if (player.getPosition().intersects(ammoPickup.getPosition()) && ammoPickup.isSpawned()) {
 				bulletsSpare += ammoPickup.gotIt();
+				pickup.play();
 			}
 
 			// size up the health bar

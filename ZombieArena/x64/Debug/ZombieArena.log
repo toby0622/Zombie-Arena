@@ -1,42 +1,4 @@
-﻿  Player.cpp
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(6,13): warning C4244: '=': 將 'const float' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(7,16): warning C4244: '=': 將 'const float' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(18,13): warning C4244: '=': 將 'const float' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(19,16): warning C4244: '=': 將 'const float' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(24,29): warning C4244: '=': 將 'int' 轉換為 'T'，由於類型不同，可能導致資料遺失
-          with
-          [
-              T=float
-          ]
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(25,30): warning C4244: '=': 將 'int' 轉換為 'T'，由於類型不同，可能導致資料遺失
-          with
-          [
-              T=float
-          ]
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(128,32): warning C4244: '=': 將 'int' 轉換為 'T'，由於類型不同，可能導致資料遺失
-          with
-          [
-              T=float
-          ]
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(132,31): warning C4244: '=': 將 'int' 轉換為 'T'，由於類型不同，可能導致資料遺失
-          with
-          [
-              T=float
-          ]
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(136,33): warning C4244: '=': 將 'int' 轉換為 'T'，由於類型不同，可能導致資料遺失
-          with
-          [
-              T=float
-          ]
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(140,30): warning C4244: '=': 將 'int' 轉換為 'T'，由於類型不同，可能導致資料遺失
-          with
-          [
-              T=float
-          ]
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(144,14): warning C4244: '正在初始化': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(151,26): warning C4244: '+=': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\Player.cpp(156,31): warning C4244: '+=': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-  ZombieArena.cpp
+﻿  ZombieArena.cpp
 C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\ZombieArena.cpp(26,44): warning C4244: '=': 將 'unsigned int' 轉換為 'T'，由於類型不同，可能導致資料遺失
           with
           [
@@ -57,10 +19,9 @@ C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\ZombieArena.cpp(29,42):
           [
               T=float
           ]
-C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\ZombieArena.cpp(536,50): warning C4244: '引數': 將 'int' 轉換為 'T'，由於類型不同，可能導致資料遺失
+C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\ZombieArena.cpp(544,50): warning C4244: '引數': 將 'int' 轉換為 'T'，由於類型不同，可能導致資料遺失
           with
           [
               T=float
           ]
-  正在產生程式碼...
   ZombieArena.vcxproj -> C:\Users\toby0\Documents\GitHub\Zombie-Arena\ZombieArena\x64\Debug\ZombieArena.exe
